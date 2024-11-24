@@ -1,0 +1,3 @@
+rootProject.name = 'india_sdk_plugin'
+include ':libs'
+project(':libs').projectDir = new File(settingsDir, '../libs')
