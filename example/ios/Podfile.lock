@@ -1,0 +1,28 @@
+PODS:
+  - Flutter (1.0.0)
+  - india_sdk (0.0.1):
+    - Flutter
+  - integration_test (0.0.1):
+    - Flutter
+
+DEPENDENCIES:
+  - Flutter (from `Flutter`)
+  - india_sdk (from `.symlinks/plugins/india_sdk/ios`)
+  - integration_test (from `.symlinks/plugins/integration_test/ios`)
+
+EXTERNAL SOURCES:
+  Flutter:
+    :path: Flutter
+  india_sdk:
+    :path: ".symlinks/plugins/india_sdk/ios"
+  integration_test:
+    :path: ".symlinks/plugins/integration_test/ios"
+
+SPEC CHECKSUMS:
+  Flutter: e0871f40cf51350855a761d2e70bf5af5b9b5de7
+  india_sdk: 170ad0c22dd6446cd24494c03ac037558c824d8c
+  integration_test: 252f60fa39af5e17c3aa9899d35d908a0721b573
+
+PODFILE CHECKSUM: d4436defca53997647bf94dd44dfc8fb31ab77f7
+
+COCOAPODS: 1.16.2

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="login_back">#e9eff7</color>
+
+    <color name="tp_text_color">#252c57</color>
+    <color name="tp_hint">#727897</color>
+    <color name="tp_icon_color">#1572e8</color>
+    <color name="lbl_success">#37c299</color>
+    <color name="lbl_failure">#d7412d</color>
+</resources>

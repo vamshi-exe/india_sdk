@@ -1,0 +1,11 @@
+framework module CCAvenueSDK {
+  umbrella header "CCAvenueSDK.h"
+  export *
+
+  module * { export * }
+}
+
+module CCAvenueSDK.Swift {
+  header "CCAvenueSDK-Swift.h"
+  requires objc
+}

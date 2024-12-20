@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="separator">--------------------------------------------------------------------------</string>
+    <string name="signature_not_required">SIGNATURE NOT REQUIRED</string>
+    <string name="signature_not_required1"> I AGREE TO PAY AS PER CARD ISSUER AGREEMENT</string>
+    <string name="lbl_merchant_copy">MERCHANT COPY</string>
+
+    <string name="charge_slip_data"><![CDATA[<font color="#727897">%1$s</font> <font color="#252c57">%2$s</font>]]></string>
+</resources>

@@ -1,0 +1,307 @@
+// swift-interface-format-version: 1.0
+// swift-compiler-version: Apple Swift version 5.10 (swiftlang-5.10.0.13 clang-1500.3.9.4)
+// swift-module-flags: -target arm64-apple-ios11.0 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -enable-bare-slash-regex -module-name CCAvenueSDK
+@_exported import CCAvenueSDK
+import Foundation
+import Security
+import Swift
+import SystemConfiguration
+import UIKit
+import WebKit
+import _Concurrency
+import _StringProcessing
+import _SwiftConcurrencyShims
+public protocol ValidationDelegate {
+  func validationSuccessful()
+  func validationFailed(_ errors: [(any CCAvenueSDK.Validatable, CCAvenueSDK.ValidationError)])
+}
+extension UIKit.UIButton {
+  @_Concurrency.MainActor(unsafe) @objc override dynamic open class var layerClass: Swift.AnyClass {
+    @objc get
+  }
+}
+extension UIKit.UIResponder {
+  @_Concurrency.MainActor(unsafe) public static func currentFirst() -> UIKit.UIResponder?
+}
+public class Validator {
+  public var validations: CCAvenueSDK.ValidatorDictionary<CCAvenueSDK.ValidationRule>
+  public var errors: CCAvenueSDK.ValidatorDictionary<CCAvenueSDK.ValidationError>
+  public init()
+  public func validateField(_ field: any Swift.AnyObject & CCAvenueSDK.Validatable, callback: (_ error: CCAvenueSDK.ValidationError?) -> Swift.Void)
+  public func styleTransformers(success: ((_ validationRule: CCAvenueSDK.ValidationRule) -> Swift.Void)?, error: ((_ validationError: CCAvenueSDK.ValidationError) -> Swift.Void)?)
+  public func registerField(_ field: any Swift.AnyObject & CCAvenueSDK.Validatable, errorLabel: UIKit.UILabel? = nil, lineView: UIKit.UIView? = nil, rules: [any CCAvenueSDK.Rule])
+  public func unregisterField(_ field: any Swift.AnyObject & CCAvenueSDK.Validatable)
+  public func validate(_ delegate: any CCAvenueSDK.ValidationDelegate)
+  public func validate(_ callback: (_ errors: [(any CCAvenueSDK.Validatable, CCAvenueSDK.ValidationError)]) -> Swift.Void)
+  @objc deinit
+}
+public typealias ValidatableField = Swift.AnyObject & CCAvenueSDK.Validatable
+public protocol Validatable {
+  var validationText: Swift.String { get }
+}
+extension UIKit.UIView : CCAvenueSDK.Validatable {
+  @_Concurrency.MainActor(unsafe) public var validationText: Swift.String {
+    get
+  }
+}
+extension UIKit.UIColor {
+  convenience public init(r: CoreFoundation.CGFloat, g: CoreFoundation.CGFloat, b: CoreFoundation.CGFloat)
+  convenience public init(r: CoreFoundation.CGFloat, g: CoreFoundation.CGFloat, b: CoreFoundation.CGFloat, a: CoreFoundation.CGFloat)
+}
+public protocol Rule {
+  func validate(_ value: Swift.String) -> Swift.Bool
+  func errorMessage() -> Swift.String
+}
+public struct ValidatorDictionary<T> : Swift.Sequence {
+  public subscript(key: (any Swift.AnyObject & CCAvenueSDK.Validatable)?) -> T? {
+    get
+    set(newValue)
+  }
+  public mutating func removeAll()
+  public mutating func removeValueForKey(_ key: any Swift.AnyObject & CCAvenueSDK.Validatable)
+  public var isEmpty: Swift.Bool {
+    get
+  }
+  public func makeIterator() -> Swift.DictionaryIterator<Swift.ObjectIdentifier, T>
+  public typealias Element = Swift.Dictionary<Swift.ObjectIdentifier, T>.Iterator.Element
+  public typealias Iterator = Swift.DictionaryIterator<Swift.ObjectIdentifier, T>
+}
+open class RegexRule : CCAvenueSDK.Rule {
+  public init(regex: Swift.String, message: Swift.String = "Invalid Regular Expression")
+  open func validate(_ value: Swift.String) -> Swift.Bool
+  open func errorMessage() -> Swift.String
+  @objc deinit
+}
+@_hasMissingDesignatedInitializers public class RSAUtils {
+  @objc @_hasMissingDesignatedInitializers @available(iOS 1.2.0, *)
+  public class RSAUtilsError : Foundation.NSError {
+    @available(*, unavailable)
+    @objc required dynamic public init?(coder aDecoder: Foundation.NSCoder)
+    @objc deinit
+  }
+  @available(iOS 1.2.0, *)
+  public static func deleteRSAKeyFromKeychain(_ tagName: Swift.String)
+  @available(iOS 1.2.0, *)
+  public static func getRSAKeyFromKeychain(_ tagName: Swift.String) -> Security.SecKey?
+  @available(iOS 1.2.0, *)
+  @discardableResult
+  public static func addRSAPrivateKey(_ privkeyBase64: Swift.String, tagName: Swift.String) throws -> Security.SecKey?
+  @available(iOS 1.2.0, *)
+  public static func addRSAPublicKey(_ pubkeyBase64: Swift.String, tagName: Swift.String) throws -> Security.SecKey?
+  @available(iOS 1.2.0, *)
+  public static func encryptWithRSAKey(_ data: Foundation.Data, rsaKeyRef: Security.SecKey, padding: Security.SecPadding) -> Foundation.Data?
+  @available(iOS 1.2.0, *)
+  public static func decryptWithRSAKey(_ encryptedData: Foundation.Data, rsaKeyRef: Security.SecKey, padding: Security.SecPadding) -> Foundation.Data?
+  @available(iOS 1.2.0, *)
+  public static func encryptWithRSAKey(data: Foundation.Data, tagName: Swift.String) -> Foundation.Data?
+  @available(iOS 1.2.0, *)
+  public static func encryptWithRSAKey(str: Swift.String, tagName: Swift.String) -> Foundation.Data?
+  @available(iOS 1.2.0, *)
+  public static func decryptWithRSAKey(encryptedData: Foundation.Data, tagName: Swift.String) -> Foundation.Data?
+  @available(iOS 1.2.0, *)
+  public static func encryptWithRSAPublicKey(data: Foundation.Data, pubkeyBase64: Swift.String) throws -> Foundation.Data?
+  @available(iOS 1.2.0, *)
+  public static func encryptWithRSAPublicKey(str: Swift.String, pubkeyBase64: Swift.String) throws -> Foundation.Data?
+  @available(iOS 1.2.0, *)
+  public static func encryptWithRSAPublicKey(data: Foundation.Data, pubkeyBase64: Swift.String, tagName: Swift.String) throws -> Foundation.Data?
+  @available(iOS 1.2.0, *)
+  public static func encryptWithRSAPublicKey(str: Swift.String, pubkeyBase64: Swift.String, tagName: Swift.String) throws -> Foundation.Data?
+  @available(iOS 1.2.0, *)
+  public static func decryptWithRSAPrivateKey(encryptedData: Foundation.Data, privkeyBase64: Swift.String) throws -> Foundation.Data?
+  @available(iOS 1.2.0, *)
+  public static func decryptWithRSAPrivateKey(encryptedData: Foundation.Data, privkeyBase64: Swift.String, tagName: Swift.String) throws -> Foundation.Data?
+  @objc deinit
+}
+extension UIKit.UIView {
+  @_Concurrency.MainActor(unsafe) public func addConstraintsWithFormat(_ format: Swift.String, views: UIKit.UIView...)
+  @_Concurrency.MainActor(unsafe) public func fillSuperview()
+  @_Concurrency.MainActor(unsafe) public func anchor(_ top: UIKit.NSLayoutYAxisAnchor? = nil, left: UIKit.NSLayoutXAxisAnchor? = nil, bottom: UIKit.NSLayoutYAxisAnchor? = nil, right: UIKit.NSLayoutXAxisAnchor? = nil, topConstant: CoreFoundation.CGFloat = 0, leftConstant: CoreFoundation.CGFloat = 0, bottomConstant: CoreFoundation.CGFloat = 0, rightConstant: CoreFoundation.CGFloat = 0, widthConstant: CoreFoundation.CGFloat = 0, heightConstant: CoreFoundation.CGFloat = 0)
+  @_Concurrency.MainActor(unsafe) public func anchorWithReturnAnchors(_ top: UIKit.NSLayoutYAxisAnchor? = nil, left: UIKit.NSLayoutXAxisAnchor? = nil, bottom: UIKit.NSLayoutYAxisAnchor? = nil, right: UIKit.NSLayoutXAxisAnchor? = nil, topConstant: CoreFoundation.CGFloat = 0, leftConstant: CoreFoundation.CGFloat = 0, bottomConstant: CoreFoundation.CGFloat = 0, rightConstant: CoreFoundation.CGFloat = 0, widthConstant: CoreFoundation.CGFloat = 0, heightConstant: CoreFoundation.CGFloat = 0) -> [UIKit.NSLayoutConstraint]
+  @_Concurrency.MainActor(unsafe) public func anchorCenterXToSuperview(constant: CoreFoundation.CGFloat = 0)
+  @_Concurrency.MainActor(unsafe) public func anchorCenterYToSuperview(constant: CoreFoundation.CGFloat = 0)
+  @_Concurrency.MainActor(unsafe) public func anchorCenterSuperview()
+}
+@objc public class ValidationError : ObjectiveC.NSObject {
+  final public let field: any Swift.AnyObject & CCAvenueSDK.Validatable
+  public var errorLabel: UIKit.UILabel?
+  final public let errorMessage: Swift.String
+  final public let errorLineView: UIKit.UIView?
+  public init(field: any Swift.AnyObject & CCAvenueSDK.Validatable, errorLabel: UIKit.UILabel?, errorLineView: UIKit.UIView?, error: Swift.String)
+  @objc deinit
+}
+@_hasMissingDesignatedInitializers public class Reach {
+  @objc deinit
+}
+extension CCAvenueSDK.MainViewController {
+  @_Concurrency.MainActor(unsafe) @objc dynamic public func tableView(_ tableView: UIKit.UITableView, numberOfRowsInSection section: Swift.Int) -> Swift.Int
+  @_Concurrency.MainActor(unsafe) @objc dynamic public func tableView(_ tableView: UIKit.UITableView, cellForRowAt indexPath: Foundation.IndexPath) -> UIKit.UITableViewCell
+  @_Concurrency.MainActor(unsafe) @objc dynamic public func tableView(_ tableView: UIKit.UITableView, didSelectRowAt indexPath: Foundation.IndexPath)
+  @_Concurrency.MainActor(unsafe) @objc dynamic public func tableView(_ tableView: UIKit.UITableView, heightForRowAt indexPath: Foundation.IndexPath) -> CoreFoundation.CGFloat
+}
+@objc public protocol MainViewControllerDelegate {
+  @objc func getResponse(_ jsonResponse: [Swift.AnyHashable : Any]?)
+}
+@objc @_inheritsConvenienceInitializers @_Concurrency.MainActor(unsafe) public class MainViewController : UIKit.UIViewController, UIKit.UICollectionViewDelegateFlowLayout, UIKit.UICollectionViewDelegate, UIKit.UICollectionViewDataSource, UIKit.UITableViewDelegate, UIKit.UITableViewDataSource, UIKit.UIScrollViewDelegate, UIKit.UITextFieldDelegate, WebKit.WKNavigationDelegate, WebKit.WKUIDelegate, UIKit.UIPickerViewDelegate, UIKit.UIPickerViewDataSource, UIKit.UIPopoverPresentationControllerDelegate, WebKit.WKScriptMessageHandler, CCAvenueSDK.ValidationDelegate {
+  @_Concurrency.MainActor(unsafe) weak public var delegate: (any CCAvenueSDK.MainViewControllerDelegate)?
+  @_Concurrency.MainActor(unsafe) convenience public init(ccRequestDictionary: [Swift.String : Any])
+  @_Concurrency.MainActor(unsafe) @objc override dynamic public func viewDidLoad()
+  @_Concurrency.MainActor(unsafe) @objc override dynamic public func viewDidAppear(_ animated: Swift.Bool)
+  @objc deinit
+  @_Concurrency.MainActor(unsafe) @objc override dynamic public func viewWillAppear(_ animated: Swift.Bool)
+  @_Concurrency.MainActor(unsafe) @objc override dynamic public func viewWillDisappear(_ animated: Swift.Bool)
+  @_Concurrency.MainActor(unsafe) @objc override dynamic public func didReceiveMemoryWarning()
+  @_Concurrency.MainActor(unsafe) @objc public func adaptivePresentationStyle(for controller: UIKit.UIPresentationController) -> UIKit.UIModalPresentationStyle
+  @_Concurrency.MainActor(unsafe) @objc override dynamic public init(nibName nibNameOrNil: Swift.String?, bundle nibBundleOrNil: Foundation.Bundle?)
+  @_Concurrency.MainActor(unsafe) @objc required dynamic public init?(coder: Foundation.NSCoder)
+}
+extension CCAvenueSDK.MainViewController {
+  @_Concurrency.MainActor(unsafe) public func validationSuccessful()
+  @_Concurrency.MainActor(unsafe) public func validationFailed(_ errors: [(any CCAvenueSDK.Validatable, CCAvenueSDK.ValidationError)])
+}
+extension CCAvenueSDK.PromotionAndDiscountListViewController {
+  @_Concurrency.MainActor(unsafe) @objc dynamic public func tableView(_ tableView: UIKit.UITableView, numberOfRowsInSection section: Swift.Int) -> Swift.Int
+  @_Concurrency.MainActor(unsafe) @objc dynamic public func tableView(_ tableView: UIKit.UITableView, cellForRowAt indexPath: Foundation.IndexPath) -> UIKit.UITableViewCell
+  @_Concurrency.MainActor(unsafe) @objc dynamic public func tableView(_ tableView: UIKit.UITableView, heightForRowAt indexPath: Foundation.IndexPath) -> CoreFoundation.CGFloat
+}
+@_hasMissingDesignatedInitializers open class SwiftLuhn {
+  public enum CardType : Swift.Int {
+    case amex
+    case visa
+    case mastercard
+    case discover
+    case dinersClub
+    case jcb
+    case maestro
+    case rupay
+    case mir
+    public init?(rawValue: Swift.Int)
+    public typealias RawValue = Swift.Int
+    public var rawValue: Swift.Int {
+      get
+    }
+  }
+  public enum CardError : Swift.Error {
+    case unsupported
+    case invalid
+    public static func == (a: CCAvenueSDK.SwiftLuhn.CardError, b: CCAvenueSDK.SwiftLuhn.CardError) -> Swift.Bool
+    public func hash(into hasher: inout Swift.Hasher)
+    public var hashValue: Swift.Int {
+      get
+    }
+  }
+  @objc deinit
+}
+extension CCAvenueSDK.SwiftLuhn.CardType {
+  public func stringValue() -> Swift.String
+  public func maxLength() -> Swift.Int
+  public init?(string: Swift.String)
+}
+extension Swift.String {
+  public func isValidCardNumber() -> Swift.Bool
+  public func cardType() -> CCAvenueSDK.SwiftLuhn.CardType?
+  public func suggestedCardType() -> CCAvenueSDK.SwiftLuhn.CardType?
+  public func formattedCardNumber() -> Swift.String
+}
+extension CCAvenueSDK.MainViewController {
+  @_Concurrency.MainActor(unsafe) @objc dynamic public func numberOfComponents(in pickerView: UIKit.UIPickerView) -> Swift.Int
+  @_Concurrency.MainActor(unsafe) @objc dynamic public func pickerView(_ pickerView: UIKit.UIPickerView, numberOfRowsInComponent component: Swift.Int) -> Swift.Int
+  @_Concurrency.MainActor(unsafe) @objc dynamic public func pickerView(_ pickerView: UIKit.UIPickerView, titleForRow row: Swift.Int, forComponent component: Swift.Int) -> Swift.String?
+  @_Concurrency.MainActor(unsafe) @objc dynamic public func pickerView(_ pickerView: UIKit.UIPickerView, didSelectRow row: Swift.Int, inComponent component: Swift.Int)
+}
+@objc @_inheritsConvenienceInitializers @_Concurrency.MainActor(unsafe) public class PromotionAndDiscountListViewController : UIKit.UIViewController, UIKit.UITableViewDelegate, UIKit.UITableViewDataSource {
+  @_Concurrency.MainActor(unsafe) @objc override dynamic public func viewDidLoad()
+  @_Concurrency.MainActor(unsafe) @objc override dynamic public init(nibName nibNameOrNil: Swift.String?, bundle nibBundleOrNil: Foundation.Bundle?)
+  @_Concurrency.MainActor(unsafe) @objc required dynamic public init?(coder: Foundation.NSCoder)
+  @objc deinit
+}
+@_hasMissingDesignatedInitializers public class LoadingOverlay {
+  public func showOverlay(view: UIKit.UIView!)
+  public func hideOverlayView()
+  public func isShowingOverlay() -> Swift.Bool
+  @objc deinit
+}
+public class ValidationRule {
+  public var field: any Swift.AnyObject & CCAvenueSDK.Validatable
+  public var errorLabel: UIKit.UILabel?
+  public var rules: [any CCAvenueSDK.Rule]
+  public var lineView: UIKit.UIView?
+  public init(field: any Swift.AnyObject & CCAvenueSDK.Validatable, rules: [any CCAvenueSDK.Rule], errorLabel: UIKit.UILabel?, lineView: UIKit.UIView?)
+  public func validateField() -> CCAvenueSDK.ValidationError?
+  @objc deinit
+}
+extension CCAvenueSDK.MainViewController {
+  @_Concurrency.MainActor(unsafe) @objc dynamic public func textFieldDidBeginEditing(_ textField: UIKit.UITextField)
+  @_Concurrency.MainActor(unsafe) @objc dynamic public func textFieldDidEndEditing(_ textField: UIKit.UITextField, reason: UIKit.UITextField.DidEndEditingReason)
+  @_Concurrency.MainActor(unsafe) @objc dynamic public func textFieldShouldReturn(_ textField: UIKit.UITextField) -> Swift.Bool
+  @_Concurrency.MainActor(unsafe) @objc dynamic public func textField(_ textField: UIKit.UITextField, shouldChangeCharactersIn range: Foundation.NSRange, replacementString string: Swift.String) -> Swift.Bool
+}
+@objc @_inheritsConvenienceInitializers @_Concurrency.MainActor(unsafe) public class Checkbox : UIKit.UIControl {
+  public enum CheckmarkStyle {
+    case square
+    case circle
+    case cross
+    case tick
+    public static func == (a: CCAvenueSDK.Checkbox.CheckmarkStyle, b: CCAvenueSDK.Checkbox.CheckmarkStyle) -> Swift.Bool
+    public func hash(into hasher: inout Swift.Hasher)
+    public var hashValue: Swift.Int {
+      get
+    }
+  }
+  public enum BorderStyle {
+    case square
+    case circle
+    public static func == (a: CCAvenueSDK.Checkbox.BorderStyle, b: CCAvenueSDK.Checkbox.BorderStyle) -> Swift.Bool
+    public func hash(into hasher: inout Swift.Hasher)
+    public var hashValue: Swift.Int {
+      get
+    }
+  }
+  @_Concurrency.MainActor(unsafe) public var checkmarkStyle: CCAvenueSDK.Checkbox.CheckmarkStyle
+  @_Concurrency.MainActor(unsafe) public var borderStyle: CCAvenueSDK.Checkbox.BorderStyle
+  @_Concurrency.MainActor(unsafe) public var borderWidth: CoreFoundation.CGFloat
+  @_Concurrency.MainActor(unsafe) public var checkmarkSize: CoreFoundation.CGFloat
+  @_Concurrency.MainActor(unsafe) public var uncheckedBorderColor: UIKit.UIColor!
+  @_Concurrency.MainActor(unsafe) public var checkedBorderColor: UIKit.UIColor!
+  @_Concurrency.MainActor(unsafe) public var checkmarkColor: UIKit.UIColor!
+  @_Concurrency.MainActor(unsafe) public var checkboxBackgroundColor: UIKit.UIColor!
+  @_Concurrency.MainActor(unsafe) public var increasedTouchRadius: CoreFoundation.CGFloat
+  @_Concurrency.MainActor(unsafe) public var valueChanged: ((_ isChecked: Swift.Bool) -> Swift.Void)?
+  @_Concurrency.MainActor(unsafe) public var isChecked: Swift.Bool {
+    get
+    set
+  }
+  @_Concurrency.MainActor(unsafe) public var useHapticFeedback: Swift.Bool
+  @_Concurrency.MainActor(unsafe) @objc override dynamic public init(frame: CoreFoundation.CGRect)
+  @_Concurrency.MainActor(unsafe) @objc required dynamic public init?(coder aDecoder: Foundation.NSCoder)
+  @_Concurrency.MainActor(unsafe) @objc override dynamic public func draw(_ rect: CoreFoundation.CGRect)
+  @_Concurrency.MainActor(unsafe) @objc override dynamic public func point(inside point: CoreFoundation.CGPoint, with event: UIKit.UIEvent?) -> Swift.Bool
+  @objc deinit
+}
+extension CCAvenueSDK.MainViewController {
+  @_Concurrency.MainActor(unsafe) @objc dynamic public func userContentController(_ userContentController: WebKit.WKUserContentController, didReceive message: WebKit.WKScriptMessage)
+  @_Concurrency.MainActor(unsafe) @objc dynamic public func webView(_ webView: WebKit.WKWebView, didFail navigation: WebKit.WKNavigation!, withError error: any Swift.Error)
+  @_Concurrency.MainActor(unsafe) @objc dynamic public func webView(_ webView: WebKit.WKWebView, didStartProvisionalNavigation navigation: WebKit.WKNavigation!)
+  @_Concurrency.MainActor(unsafe) @objc dynamic public func webView(_ webView: WebKit.WKWebView, decidePolicyFor navigationResponse: WebKit.WKNavigationResponse, decisionHandler: @escaping (WebKit.WKNavigationResponsePolicy) -> Swift.Void)
+  @_Concurrency.MainActor(unsafe) @objc dynamic public func webView(_ webView: WebKit.WKWebView, decidePolicyFor navigationAction: WebKit.WKNavigationAction, decisionHandler: @escaping (WebKit.WKNavigationActionPolicy) -> Swift.Void)
+  @_Concurrency.MainActor(unsafe) @objc dynamic public func webView(_ webView: WebKit.WKWebView, didFinish navigation: WebKit.WKNavigation!)
+  @_Concurrency.MainActor(unsafe) @objc dynamic public func webView(_ webView: WebKit.WKWebView, runJavaScriptAlertPanelWithMessage message: Swift.String, initiatedByFrame frame: WebKit.WKFrameInfo, completionHandler: @escaping () -> Swift.Void)
+  @_Concurrency.MainActor(unsafe) @objc dynamic public func webView(_ webView: WebKit.WKWebView, runJavaScriptConfirmPanelWithMessage message: Swift.String, initiatedByFrame frame: WebKit.WKFrameInfo, completionHandler: @escaping (Swift.Bool) -> Swift.Void)
+  @_Concurrency.MainActor(unsafe) @objc dynamic public func webView(_ webView: WebKit.WKWebView, runJavaScriptTextInputPanelWithPrompt prompt: Swift.String, defaultText: Swift.String?, initiatedByFrame frame: WebKit.WKFrameInfo, completionHandler: @escaping (Swift.String?) -> Swift.Void)
+}
+extension CCAvenueSDK.MainViewController {
+  @_Concurrency.MainActor(unsafe) @objc dynamic public func numberOfSections(in collectionView: UIKit.UICollectionView) -> Swift.Int
+  @_Concurrency.MainActor(unsafe) @objc dynamic public func collectionView(_ collectionView: UIKit.UICollectionView, numberOfItemsInSection section: Swift.Int) -> Swift.Int
+  @_Concurrency.MainActor(unsafe) @objc dynamic public func collectionView(_ collectionView: UIKit.UICollectionView, cellForItemAt indexPath: Foundation.IndexPath) -> UIKit.UICollectionViewCell
+  @_Concurrency.MainActor(unsafe) @objc dynamic public func collectionView(_ collectionView: UIKit.UICollectionView, didSelectItemAt indexPath: Foundation.IndexPath)
+  @_Concurrency.MainActor(unsafe) @objc dynamic public func collectionView(_ collectionView: UIKit.UICollectionView, layout collectionViewLayout: UIKit.UICollectionViewLayout, referenceSizeForHeaderInSection section: Swift.Int) -> CoreFoundation.CGSize
+  @_Concurrency.MainActor(unsafe) @objc dynamic public func collectionView(_ collectionView: UIKit.UICollectionView, viewForSupplementaryElementOfKind kind: Swift.String, at indexPath: Foundation.IndexPath) -> UIKit.UICollectionReusableView
+}
+extension CCAvenueSDK.SwiftLuhn.CardType : Swift.Equatable {}
+extension CCAvenueSDK.SwiftLuhn.CardType : Swift.Hashable {}
+extension CCAvenueSDK.SwiftLuhn.CardType : Swift.RawRepresentable {}
+extension CCAvenueSDK.SwiftLuhn.CardError : Swift.Equatable {}
+extension CCAvenueSDK.SwiftLuhn.CardError : Swift.Hashable {}
+extension CCAvenueSDK.Checkbox.CheckmarkStyle : Swift.Equatable {}
+extension CCAvenueSDK.Checkbox.CheckmarkStyle : Swift.Hashable {}
+extension CCAvenueSDK.Checkbox.BorderStyle : Swift.Equatable {}
+extension CCAvenueSDK.Checkbox.BorderStyle : Swift.Hashable {}
